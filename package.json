@@ -1,0 +1,11 @@
+{
+  "name": "node-mysql-api",
+  "version": "1.0.0",
+  "description": "Node.js + TypeScript + MySQL boilerplate API",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  }
+}
