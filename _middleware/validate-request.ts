@@ -11,9 +11,10 @@ export function validateRequest(req: Request, next: NextFunction, schema: Joi.Ob
   const { error, value } = schema.validate(req.body, options);
   if (error) {
     next(`Validation error: ${error.details.map((x) => x.message).join(", ")}`);
-    return;
+  } else { 
+    req.body = value; 
+    next();
   }
-
-  req.body = value;
-  next();
 }
+
+export default validateRequest;

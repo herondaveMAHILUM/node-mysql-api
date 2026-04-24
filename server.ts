@@ -1,30 +1,24 @@
 import express from "express";
-import cors from "cors";
+import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-import "./_helpers/db";
-import accountsController from "./accounts/accounts.controller";
-import swaggerRouter from "./_helpers/swagger";
+import cors from "cors";
 import errorHandler from "./_middleware/error-handler";
+import accountsController from "./accounts/accounts.controller";
+import swaggerDocs from "./_helpers/swagger";
 
 const app = express();
-const port = 4000;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: true,
-    credentials: true
-  })
-);
 
-app.use("/api-docs", swaggerRouter);
+app.use(cors({ origin: (origin, callback) => callback(null, true), credentials: true }));
+
 app.use("/accounts", accountsController);
+
+app.use("/api-docs", swaggerDocs);
 
 app.use(errorHandler);
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-  console.log(`Swagger docs: http://localhost:${port}/api-docs`);
-});
+const port = process.env.NODE_ENV === "production" ? Number(process.env.PORT) || 80 : 4000;
+app.listen(port, () => console.log("Server listening on port " + port));
