@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const config_json_1 = __importDefault(require("../config.json"));
+const secret = process.env.JWT_SECRET || "replace-with-a-long-random-secret";
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const crypto_1 = __importDefault(require("crypto"));
@@ -160,7 +160,7 @@ async function hash(password) {
     return await bcryptjs_1.default.hash(password, 10);
 }
 function generateJwtToken(account) {
-    return jsonwebtoken_1.default.sign({ sub: account.id, id: account.id }, config_json_1.default.secret, { expiresIn: "15m" });
+    return jsonwebtoken_1.default.sign({ sub: account.id, id: account.id }, secret, { expiresIn: "15m" });
 }
 function generateRefreshToken(account, ipAddress) {
     return new db_1.default.RefreshToken({

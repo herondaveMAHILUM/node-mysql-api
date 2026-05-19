@@ -1,14 +1,9 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = authorize;
-// @ts-ignore - keep compatibility with legacy middleware style
 const express_jwt_1 = require("express-jwt");
-const config_json_1 = __importDefault(require("../config.json"));
-const db_1 = __importDefault(require("../_helpers/db"));
-const { secret } = config_json_1.default;
+const db_1 = require("../_helpers/db");
+const secret = process.env.JWT_SECRET || "replace-with-a-long-random-secret";
 function authorize(roles = []) {
     if (typeof roles === "string") {
         roles = [roles];
