@@ -1,4 +1,3 @@
-import config from "../config.json";
 import mysql from "mysql2/promise";
 import { Sequelize } from "sequelize";
 import accountModel from "../accounts/account.model";
@@ -12,7 +11,12 @@ initialize().catch((err) => {
 });
 
 async function initialize() {
-  const { host, port, user, password, database } = config.database;
+  const host = process.env.DB_HOST || "localhost";
+  const port = Number(process.env.DB_PORT) || 3306;
+  const user = process.env.DB_USER || "root";
+  const password = process.env.DB_PASSWORD || "";
+  const database = process.env.DB_NAME || "node_mysql_api";
+
   const connection = await mysql.createConnection({ host, port, user, password });
 
   await connection.query(`CREATE DATABASE IF NOT EXISTS \`${database}\`;`);

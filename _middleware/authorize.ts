@@ -1,9 +1,8 @@
 import { expressjwt as jwt } from "express-jwt";
-import config from "../config.json";
 import db from "../_helpers/db";
 import { RequestHandler } from "express";
 
-const { secret } = config;
+const secret = process.env.JWT_SECRET || "replace-with-a-long-random-secret";
 
 export default function authorize(roles: any = []) {
   if (typeof roles === "string") {
