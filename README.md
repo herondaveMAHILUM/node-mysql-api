@@ -1,9 +1,9 @@
 # INTPROG Final Project — Backend API
 
 ## Live URLs
-- Backend API: https://YOUR-API-NAME.onrender.com
-- Swagger Docs: https://YOUR-API-NAME.onrender.com/api-docs
-- Frontend: https://YOUR-FRONTEND-NAME.onrender.com
+- Backend API: https://node-mysql-api-ndpr.onrender.com
+- Swagger Docs: https://node-mysql-api-ndpr.onrender.com/api-docs
+- Frontend: https://angular-21-auth-boilerplate-g0qk.onrender.com
 
 ## Local Development
 
