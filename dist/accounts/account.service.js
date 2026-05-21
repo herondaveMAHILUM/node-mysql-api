@@ -72,7 +72,8 @@ async function register(params, origin) {
     account.verificationToken = randomTokenString();
     account.passwordHash = await hash(params.password);
     await account.save();
-    await sendVerificationEmail(account, origin);
+    await sendVerificationEmail(account, origin).catch(err => console.error("sendVerificationEmail failed:", err));
+    console.log("Registration complete for:", params.email);
 }
 async function verifyEmail({ token }) {
     const account = await db_1.default.Account.findOne({ where: { verificationToken: token } });
