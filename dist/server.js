@@ -14,14 +14,10 @@ const app = (0, express_1.default)();
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(body_parser_1.default.json());
 app.use((0, cookie_parser_1.default)());
-// allow cors requests from any origin and with credentials
-app.use((0, cors_1.default)({ origin: (origin, callback) => callback(null, true), credentials: true }));
-// api routes
+const allowedOrigin = process.env.CORS_ORIGIN || "http://localhost:4200";
+app.use((0, cors_1.default)({ origin: allowedOrigin, credentials: true }));
 app.use("/accounts", accounts_controller_1.default);
-// swagger docs route
 app.use("/api-docs", swagger_1.default);
-// global error handler
 app.use(error_handler_1.default);
-// start server
 const port = process.env.NODE_ENV === "production" ? Number(process.env.PORT) || 80 : 4000;
 app.listen(port, () => console.log("Server listening on port " + port));

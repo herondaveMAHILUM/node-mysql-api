@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const secret = process.env.JWT_SECRET || "replace-with-a-long-random-secret";
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const crypto_1 = __importDefault(require("crypto"));
@@ -11,6 +10,7 @@ const sequelize_1 = require("sequelize");
 const send_email_1 = __importDefault(require("../_helpers/send-email"));
 const db_1 = __importDefault(require("../_helpers/db"));
 const role_1 = __importDefault(require("../_helpers/role"));
+const secret = process.env.JWT_SECRET || "replace-with-a-long-random-secret";
 exports.default = {
     authenticate,
     refreshToken,
